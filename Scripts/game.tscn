@@ -1,6 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://brtqkwjtvg8f0"]
 
-[ext_resource type="Script" path="res://Scenes/game.gd" id="1_c8x7q"]
+[ext_resource type="Script" path="res://Scenes/game.gd" id="1_0qkbv"]
 
 [node name="Game" type="Node2D"]
-script = ExtResource("1_c8x7q")
+script = ExtResource("1_0qkbv")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 308.0
+offset_bottom = 210.0
+color = Color(0.20871, 0.20871, 0.20871, 1)
