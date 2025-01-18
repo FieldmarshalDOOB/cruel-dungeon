@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://unn33jg8g5cw"
-path="res://.godot/imported/Damp Dungeon Sprites.png-1b98de757f0d1324a67b7f52ec1206ba.ctex"
+uid="uid://bfdbkt0f5rx3n"
+path="res://.godot/imported/03_UI_Stuff.png-7af74a03ed9c4e67e1c2b95773478e3d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Damp Dungeon Sprites.png"
-dest_files=["res://.godot/imported/Damp Dungeon Sprites.png-1b98de757f0d1324a67b7f52ec1206ba.ctex"]
+source_file="res://assets/03_UI_Stuff.png"
+dest_files=["res://.godot/imported/03_UI_Stuff.png-7af74a03ed9c4e67e1c2b95773478e3d.ctex"]
 
 [params]
 

@@ -1,33 +1,31 @@
-[gd_scene load_steps=6 format=3 uid="uid://bpwkyme4k0xh8"]
+[gd_scene load_steps=5 format=3 uid="uid://bpwkyme4k0xh8"]
 
-[ext_resource type="Script" path="res://Scenes/player.gd" id="1_2mjy1"]
-[ext_resource type="Texture2D" uid="uid://cppa8evjq075q" path="res://icon.svg" id="1_k3n2u"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xn6p8"]
-atlas = ExtResource("1_k3n2u")
-region = Rect2(0, 0, 128, 128)
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_wrtln"]
+[ext_resource type="Texture2D" uid="uid://1ymhj6ymx0pe" path="res://assets/knight.png" id="2_hcl41"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ohnfq"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xn6p8")
+"texture": ExtResource("2_hcl41")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_2vg3o"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pdq2x"]
+radius = 4.0
+height = 18.0
 
 [node name="Player" type="CharacterBody2D"]
-script = ExtResource("1_2mjy1")
+script = ExtResource("1_wrtln")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-modulate = Color(1, 0.490196, 0.356863, 1)
-scale = Vector2(0.140625, 0.140625)
+position = Vector2(-1.19209e-07, -1.19209e-07)
 sprite_frames = SubResource("SpriteFrames_ohnfq")
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_2vg3o")
+visible = false
+shape = SubResource("CapsuleShape2D_pdq2x")

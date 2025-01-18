@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcyhmwc88htbe"]
+
+[ext_resource type="Texture2D" uid="uid://b3rru61788ams" path="res://assets/skeleton.png" id="1_ya6kq"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_aew5h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ya6kq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ayjjy"]
+radius = 5.0
+height = 18.0
+
+[node name="Skeleton" type="Area2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_aew5h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_ayjjy")

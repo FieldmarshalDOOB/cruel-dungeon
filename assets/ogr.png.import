@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://s7g6njbdwkjs"
-path="res://.godot/imported/Damp Dungeon Tileset.png-299a6f5c1c4d57ac6076fcbc185604fa.ctex"
+uid="uid://cs1u7foqw2kxy"
+path="res://.godot/imported/ogr.png-22c912332dec5cf2883b8e1116e72301.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Damp Dungeon Tileset.png"
-dest_files=["res://.godot/imported/Damp Dungeon Tileset.png-299a6f5c1c4d57ac6076fcbc185604fa.ctex"]
+source_file="res://assets/ogr.png"
+dest_files=["res://.godot/imported/ogr.png-22c912332dec5cf2883b8e1116e72301.ctex"]
 
 [params]
 
