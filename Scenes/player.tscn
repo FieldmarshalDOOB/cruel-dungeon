@@ -27,5 +27,4 @@ sprite_frames = SubResource("SpriteFrames_ohnfq")
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CapsuleShape2D_pdq2x")
