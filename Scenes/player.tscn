@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bpwkyme4k0xh8"]
+[gd_scene load_steps=6 format=3 uid="uid://bpwkyme4k0xh8"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_wrtln"]
 [ext_resource type="Texture2D" uid="uid://1ymhj6ymx0pe" path="res://assets/knight.png" id="2_hcl41"]
@@ -18,8 +18,14 @@ animations = [{
 radius = 3.0
 height = 12.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_6tbnj"]
+radius = 80.0
+
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
+motion_mode = 1
+platform_on_leave = 2
+platform_floor_layers = 0
 script = ExtResource("1_wrtln")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -31,3 +37,8 @@ autoplay = "default"
 position = Vector2(0, -2)
 rotation = -1.5708
 shape = SubResource("CapsuleShape2D_pdq2x")
+
+[node name="Player_vision" type="Area2D" parent="."]
+
+[node name="vison_cirlce" type="CollisionShape2D" parent="Player_vision"]
+shape = SubResource("CircleShape2D_6tbnj")
