@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_pt8ud"]
 [ext_resource type="Texture2D" uid="uid://c1tjylfw4kp54" path="res://assets/02_Tiles.png" id="3_3x8cq"]
 [ext_resource type="PackedScene" uid="uid://bpwkyme4k0xh8" path="res://Scenes/player.tscn" id="3_xq144"]
-[ext_resource type="Texture2D" uid="uid://b3rru61788ams" path="res://assets/skeleton.png" id="4_dy4xr"]
 [ext_resource type="Texture2D" uid="uid://cs1u7foqw2kxy" path="res://assets/ogr.png" id="5_y76ql"]
 [ext_resource type="Texture2D" uid="uid://d83d15a5uhal" path="res://assets/lech.png" id="6_0p1il"]
+[ext_resource type="PackedScene" uid="uid://dcyhmwc88htbe" path="res://Scenes/skeleton.tscn" id="6_6xtun"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y4rav"]
 texture = ExtResource("3_3x8cq")
@@ -871,11 +871,6 @@ limit_top = -277
 limit_right = 480
 limit_bottom = 267
 
-[node name="Skeleton" type="Sprite2D" parent="."]
-position = Vector2(-408, 113)
-scale = Vector2(1.05556, 1.05556)
-texture = ExtResource("4_dy4xr")
-
 [node name="Ogr" type="Sprite2D" parent="."]
 position = Vector2(217, -69)
 scale = Vector2(2.0625, 2.0625)
@@ -885,3 +880,6 @@ texture = ExtResource("5_y76ql")
 position = Vector2(419, -181)
 scale = Vector2(1.25, 1.25)
 texture = ExtResource("6_0p1il")
+
+[node name="Skeleton" parent="." instance=ExtResource("6_6xtun")]
+position = Vector2(-408, 117)

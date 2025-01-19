@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://m2dk567opyy2"]
+
+[ext_resource type="Texture2D" uid="uid://c1tjylfw4kp54" path="res://assets/02_Tiles.png" id="1_4g45e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmuhv"]
+atlas = ExtResource("1_4g45e")
+region = Rect2(208, 384, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ipvp"]
+atlas = ExtResource("1_4g45e")
+region = Rect2(208, 384, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_casum"]
+atlas = ExtResource("1_4g45e")
+region = Rect2(208, 352, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jf5y7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lmuhv")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ipvp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_casum")
+}],
+"loop": false,
+"name": &"open",
+"speed": 2.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_08dm0"]
+size = Vector2(16, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1c7w7"]
+size = Vector2(26, 20)
+
+[node name="Chest" type="StaticBody2D"]
+y_sort_enabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -7)
+sprite_frames = SubResource("SpriteFrames_jf5y7")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_08dm0")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="open_chest" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_1c7w7")
+debug_color = Color(0.22064, 0.623091, 0.410432, 0.42)
