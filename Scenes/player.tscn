@@ -43,3 +43,12 @@ visible = false
 [node name="vison_cirlce" type="CollisionShape2D" parent="Player_vision"]
 visible = false
 shape = SubResource("CircleShape2D_6tbnj")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_max_distance = 1000.0
+debug_enabled = true
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

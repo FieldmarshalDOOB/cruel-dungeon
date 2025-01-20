@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=4 uid="uid://brtqkwjtvg8f0"]
+[gd_scene load_steps=9 format=4 uid="uid://brtqkwjtvg8f0"]
 
+[ext_resource type="PackedScene" uid="uid://bou1s24uege6i" path="res://Scenes/target.tscn" id="2_otw2p"]
 [ext_resource type="Texture2D" uid="uid://c1tjylfw4kp54" path="res://assets/02_Tiles.png" id="3_3x8cq"]
 [ext_resource type="PackedScene" uid="uid://bpwkyme4k0xh8" path="res://Scenes/player.tscn" id="3_xq144"]
 [ext_resource type="Texture2D" uid="uid://cs1u7foqw2kxy" path="res://assets/ogr.png" id="5_y76ql"]
@@ -877,9 +878,12 @@ scale = Vector2(2.0625, 2.0625)
 texture = ExtResource("5_y76ql")
 
 [node name="Lich" type="Sprite2D" parent="."]
-position = Vector2(419, -181)
+position = Vector2(406, -202)
 scale = Vector2(1.25, 1.25)
 texture = ExtResource("6_0p1il")
 
 [node name="Skeleton" parent="." instance=ExtResource("6_6xtun")]
 position = Vector2(-408, 117)
+
+[node name="Target" parent="." instance=ExtResource("2_otw2p")]
+position = Vector2(424, -247)
