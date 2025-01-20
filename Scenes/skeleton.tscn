@@ -1,32 +1,48 @@
-[gd_scene load_steps=6 format=3 uid="uid://dcyhmwc88htbe"]
+[gd_scene load_steps=8 format=3 uid="uid://dcyhmwc88htbe"]
 
 [ext_resource type="Script" path="res://Scripts/skeleton.gd" id="1_6uy4v"]
-[ext_resource type="Texture2D" uid="uid://b3rru61788ams" path="res://assets/skeleton.png" id="1_ya6kq"]
+[ext_resource type="Texture2D" uid="uid://crrxyles4qysb" path="res://assets/dungeon_skelet_idle_right (3).png" id="2_7p4kx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3r7ba"]
+atlas = ExtResource("2_7p4kx")
+region = Rect2(10, 0, 32, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sd0v7"]
+atlas = ExtResource("2_7p4kx")
+region = Rect2(62, 0, 32, 42)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_aew5h"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_ya6kq")
+"texture": SubResource("AtlasTexture_3r7ba")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sd0v7")
 }],
 "loop": true,
-"name": &"default",
-"speed": 5.0
+"name": &"idle",
+"speed": 3.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dyrq8"]
 radius = 3.0
-height = 10.0
+height = 12.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7t11k"]
 radius = 60.0
 
 [node name="Skeleton" type="Area2D"]
+y_sort_enabled = true
 script = ExtResource("1_6uy4v")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -8)
+y_sort_enabled = true
+position = Vector2(0, -11)
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_aew5h")
+animation = &"idle"
+autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2)
@@ -35,6 +51,8 @@ shape = SubResource("CapsuleShape2D_dyrq8")
 one_way_collision_margin = 0.0
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
 shape = SubResource("CircleShape2D_7t11k")

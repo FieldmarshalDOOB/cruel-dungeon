@@ -31,7 +31,6 @@ script = ExtResource("1_wrtln")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_ohnfq")
-autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2)
@@ -39,6 +38,8 @@ rotation = -1.5708
 shape = SubResource("CapsuleShape2D_pdq2x")
 
 [node name="Player_vision" type="Area2D" parent="."]
+visible = false
 
 [node name="vison_cirlce" type="CollisionShape2D" parent="Player_vision"]
+visible = false
 shape = SubResource("CircleShape2D_6tbnj")
