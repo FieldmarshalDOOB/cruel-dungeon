@@ -38,14 +38,15 @@ script = ExtResource("1_6uy4v")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
-position = Vector2(0, -11)
+position = Vector2(0, -10)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_aew5h")
 animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.165151
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -2)
+position = Vector2(0, -1)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_dyrq8")
 one_way_collision_margin = 0.0
