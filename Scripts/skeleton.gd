@@ -6,6 +6,7 @@ var player_chaise = false
 var player = null
 var hp = 100
 var player_in_attack_zone = false
+var can_take_dmg = true
 
 
 func _physics_process(_delta: float) -> void:
@@ -45,6 +46,14 @@ func _on_enemy_hitbox_body_exited(body: Node2D) -> void:
 
 func deal_with_damage():
 	if player_in_attack_zone and global.player_current_attack == true:
-		print("Skeleton HP: " + str(hp))
-		if hp <= 0:
-			self.queue_free()
+		if can_take_dmg:
+			hp -= 20
+			$take_damage_cooldown.start()
+			can_take_dmg = false
+			print("Skeleton HP: " + str(hp))
+			if hp <= 0:
+				self.queue_free()
+
+
+func _on_take_damage_cooldown_timeout() -> void:
+	can_take_dmg = true

@@ -6,7 +6,7 @@ var speed = 50 #Скорость перса
 var target = Vector2(-439,224) #Куда бежит перс в начале
 var enemy_in_attack_range = false
 var enemy_attack_cooldown = true
-var hp = 100
+var hp = 100 #Жизни игрока
 var player_alive = true
 var attack_ip = false
 
@@ -25,8 +25,8 @@ func _physics_process(_delta):
 	velocity = position.direction_to(target) * speed
 	if position.distance_to(target) > 5: #Если цель близко тормозит(чтоб не дрожало)
 		move_and_slide()
-	#Придумать как поворачить спрайт перса
-	if self.position.x == target.x:
+
+	if self.position.x == target.x: #Поворт спрайтa
 		$AnimatedSprite2D.play("idle")
 	elif self.position.x > target.x:
 		animated_sprite_2d.flip_h = true
@@ -34,7 +34,7 @@ func _physics_process(_delta):
 		animated_sprite_2d.flip_h = false
 
 
-func player():
+func player(): #Определение игрока по функции
 	pass
 
 
@@ -53,14 +53,14 @@ func enemy_attack():
 		hp -= 10
 		enemy_attack_cooldown = false
 		$attack_cooldown.start()
-		print(hp)
+		print("Player HP: " + str(hp))
 
 
 func _on_attack_cooldown_timeout() -> void:
 	enemy_attack_cooldown = true
 
 func attack():
-	var dir = Vector2()
+	#var dir = Vector2() #Сюда добавить внимации атаки в зависимости от направления
 	if enemy_in_attack_range:
 		global.player_current_attack = true
 		attack_ip = true
