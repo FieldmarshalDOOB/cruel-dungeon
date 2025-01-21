@@ -9,10 +9,12 @@ var enemy_attack_cooldown = true
 var hp = 100 #Жизни игрока
 var player_alive = true
 var attack_ip = false
+var hp_regeneration = 0.5 #Реген хп в секунду
 
 func _physics_process(_delta): 
 	enemy_attack()
 	attack()
+	update_health()
 	
 	if hp <= 0:
 		player_alive = false #ЭКРН СМЕРТИ - МЕНЮ
@@ -53,7 +55,7 @@ func enemy_attack():
 		hp -= 10
 		enemy_attack_cooldown = false
 		$attack_cooldown.start()
-		print("Player HP: " + str(hp))
+		#print("Player HP: " + str(hp))
 
 
 func _on_attack_cooldown_timeout() -> void:
@@ -71,3 +73,22 @@ func _on_deal_attack_timer_timeout() -> void:
 	$deal_attack_timer.stop()
 	global.player_current_attack = false
 	attack_ip = false
+
+
+func update_health():
+	var hpbar = $player_hp_bar
+	hpbar.value = hp
+	#Прячет полоску хп если хп фулл
+	if hp >= 100: #убрать если в будет худ
+		hpbar.visible = false
+	else:
+		hpbar.visible = true
+
+
+func _on_hp_regen_timeout() -> void:
+	if hp < 100:
+		hp += hp_regeneration
+		if hp > 100:
+			hp = 100
+	if hp <= 0:
+		hp = 0

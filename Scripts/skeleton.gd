@@ -7,10 +7,11 @@ var player = null
 var hp = 100
 var player_in_attack_zone = false
 var can_take_dmg = true
-
+var hp_regeneration = 0
 
 func _physics_process(_delta: float) -> void:
 	deal_with_damage()
+	update_health()
 	if player_chaise:
 		position += (player.position - position)/speed
 		animated_sprite_2d.play("walk")
@@ -27,7 +28,7 @@ func _on_detection_area_body_entered(body: Node2D) -> void:
 	player_chaise = true
 
 
-func _on_detection_area_body_exited(body: Node2D) -> void:
+func _on_detection_area_body_exited(_body: Node2D) -> void:
 	player = null
 	player_chaise = false
 
@@ -50,10 +51,29 @@ func deal_with_damage():
 			hp -= 20
 			$take_damage_cooldown.start()
 			can_take_dmg = false
-			print("Skeleton HP: " + str(hp))
+			#print("Skeleton HP: " + str(hp))
 			if hp <= 0:
 				self.queue_free()
 
 
+func update_health():
+	var hpbar = $skeleton_hp_bar
+	hpbar.value = hp
+	#Прячет полоску хп если хп фулл
+	if hp >= 100: #убрать если в будет худ
+		hpbar.visible = false
+	else:
+		hpbar.visible = true
+
+
 func _on_take_damage_cooldown_timeout() -> void:
 	can_take_dmg = true
+
+
+func _on_hp_regen_timeout() -> void:
+	if hp < 100:
+		hp += hp_regeneration
+		if hp > 100:
+			hp = 100
+	if hp <= 0:
+		hp = 0
