@@ -1,5 +1,5 @@
 extends CharacterBody2D
-@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var skeleton_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 var speed = 70 #Чем выше тем медленее - мы делем на скокрость
 var player_chaise = false
@@ -12,15 +12,16 @@ var hp_regeneration = 0
 func _physics_process(_delta: float) -> void:
 	deal_with_damage()
 	update_health()
+	
 	if player_chaise:
 		position += (player.position - position)/speed
-		animated_sprite_2d.play("walk")
+		skeleton_sprite.play("walk")
 		if (player.position.x - position.x) < 0:
-			animated_sprite_2d.flip_h = true
+			skeleton_sprite.flip_h = true
 		else:
-			animated_sprite_2d.flip_h = false
+			skeleton_sprite.flip_h = false
 	else:
-		animated_sprite_2d.play("idle")
+		skeleton_sprite.play("idle")
 
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
@@ -49,10 +50,12 @@ func deal_with_damage():
 	if player_in_attack_zone and global.player_current_attack == true:
 		if can_take_dmg:
 			hp -= 20
+			$AnimatedSprite2D.play("hit")
 			$take_damage_cooldown.start()
 			can_take_dmg = false
 			#print("Skeleton HP: " + str(hp))
 			if hp <= 0:
+				$AnimatedSprite2D.play("death")
 				self.queue_free()
 
 
