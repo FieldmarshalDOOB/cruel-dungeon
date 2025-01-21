@@ -1,28 +1,62 @@
-[gd_scene load_steps=8 format=3 uid="uid://dcyhmwc88htbe"]
+[gd_scene load_steps=14 format=3 uid="uid://dcyhmwc88htbe"]
 
 [ext_resource type="Script" path="res://Scripts/skeleton.gd" id="1_6uy4v"]
-[ext_resource type="Texture2D" uid="uid://crrxyles4qysb" path="res://assets/dungeon_skelet_idle_right (3).png" id="2_7p4kx"]
+[ext_resource type="Texture2D" uid="uid://bkvid713q4id8" path="res://assets/spritesheet_skeleton_and_knight_idle.png" id="2_wefhf"]
+[ext_resource type="Texture2D" uid="uid://61h88gsmtfrm" path="res://assets/skeleton_walk.png" id="3_7dojk"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3r7ba"]
-atlas = ExtResource("2_7p4kx")
-region = Rect2(10, 0, 32, 42)
+[sub_resource type="AtlasTexture" id="AtlasTexture_gyp3i"]
+atlas = ExtResource("2_wefhf")
+region = Rect2(0, 32, 38, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sd0v7"]
-atlas = ExtResource("2_7p4kx")
-region = Rect2(62, 0, 32, 42)
+[sub_resource type="AtlasTexture" id="AtlasTexture_lp21s"]
+atlas = ExtResource("2_wefhf")
+region = Rect2(38, 32, 38, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rw0w4"]
+atlas = ExtResource("3_7dojk")
+region = Rect2(0, 0, 38, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m0cra"]
+atlas = ExtResource("3_7dojk")
+region = Rect2(38, 0, 38, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4iw8d"]
+atlas = ExtResource("3_7dojk")
+region = Rect2(76, 0, 38, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46i5w"]
+atlas = ExtResource("3_7dojk")
+region = Rect2(114, 0, 38, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_aew5h"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3r7ba")
+"texture": SubResource("AtlasTexture_gyp3i")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_sd0v7")
+"texture": SubResource("AtlasTexture_lp21s")
 }],
 "loop": true,
 "name": &"idle",
 "speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rw0w4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m0cra")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4iw8d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46i5w")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 6.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dyrq8"]
@@ -32,28 +66,44 @@ height = 12.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_7t11k"]
 radius = 60.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_m7l6a"]
+radius = 11.0
+
 [node name="Skeleton" type="CharacterBody2D"]
 y_sort_enabled = true
+motion_mode = 1
+platform_floor_layers = 0
 script = ExtResource("1_6uy4v")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
-position = Vector2(0, -10)
+position = Vector2(1, -7)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_aew5h")
-animation = &"idle"
+animation = &"walk"
 autoplay = "idle"
-frame_progress = 0.165151
+frame_progress = 0.809774
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_dyrq8")
 one_way_collision_margin = 0.0
 
-[node name="Area2D" type="Area2D" parent="."]
-visible = false
+[node name="detection_area" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-visible = false
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area"]
 shape = SubResource("CircleShape2D_7t11k")
+debug_color = Color(0.191958, 0.641356, 0.0549405, 0.42)
+
+[node name="enemy_hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_hitbox"]
+shape = SubResource("CircleShape2D_m7l6a")
+debug_color = Color(0.988597, 0, 0.300187, 0.42)
+
+[connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="enemy_hitbox" to="." method="_on_enemy_hitbox_body_entered"]
+[connection signal="body_exited" from="enemy_hitbox" to="." method="_on_enemy_hitbox_body_exited"]

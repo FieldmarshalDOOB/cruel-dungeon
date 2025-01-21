@@ -1,15 +1,50 @@
 extends CharacterBody2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
-var SPEED = 70
+var speed = 70 #Чем выше тем медленее - мы делем на скокрость
+var player_chaise = false
+var player = null
+var hp = 100
+var player_in_attack_zone = false
 
-#func _physics_process(delta: float) -> void:
-	#var direction = Input.get_vector("move_left","move_right","move_up","move_down")
-	##velocity = direction * SPEED * delta
-	##Поворачиваем спрайт лево-право по х кординате вектора(надо добавить верх-низ)
-	#if direction.x == 1:
-		#animated_sprite_2d.flip_h = true
-	#elif direction.x == -1:
-		#animated_sprite_2d.flip_h = false
 
-	
+func _physics_process(_delta: float) -> void:
+	deal_with_damage()
+	if player_chaise:
+		position += (player.position - position)/speed
+		animated_sprite_2d.play("walk")
+		if (player.position.x - position.x) < 0:
+			animated_sprite_2d.flip_h = true
+		else:
+			animated_sprite_2d.flip_h = false
+	else:
+		animated_sprite_2d.play("idle")
+
+
+func _on_detection_area_body_entered(body: Node2D) -> void:
+	player = body
+	player_chaise = true
+
+
+func _on_detection_area_body_exited(body: Node2D) -> void:
+	player = null
+	player_chaise = false
+
+func enemy():
+	pass
+
+
+func _on_enemy_hitbox_body_entered(body: Node2D) -> void:
+	if body.has_method("player"):
+		player_in_attack_zone = true
+
+
+func _on_enemy_hitbox_body_exited(body: Node2D) -> void:
+	if body.has_method("player"):
+		player_in_attack_zone = false
+
+func deal_with_damage():
+	if player_in_attack_zone and global.player_current_attack == true:
+		print("Skeleton HP: " + str(hp))
+		if hp <= 0:
+			self.queue_free()

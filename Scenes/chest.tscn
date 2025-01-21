@@ -46,18 +46,23 @@ size = Vector2(26, 20)
 y_sort_enabled = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(0.473976, 0.473976, 0.473976, 1)
 y_sort_enabled = true
 position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_jf5y7")
-animation = &"idle"
+animation = &"open"
 autoplay = "idle"
+frame = 1
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 y_sort_enabled = true
 position = Vector2(0, -2.5)
 shape = SubResource("RectangleShape2D_08dm0")
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 
 [node name="open_chest" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -3)
