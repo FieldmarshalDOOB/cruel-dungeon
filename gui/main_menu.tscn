@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c8dcfca7x5ped"]
+[gd_scene load_steps=6 format=3 uid="uid://c8dcfca7x5ped"]
 
-[ext_resource type="Texture2D" uid="uid://d83d15a5uhal" path="res://assets/lech.png" id="1_2elp0"]
-[ext_resource type="Texture2D" uid="uid://cghthyraa64lp" path="res://assets/logo.png" id="1_paqby"]
-[ext_resource type="FontFile" uid="uid://0fq4hhdq1a0b" path="res://assets/PixelifySans-VariableFont_wght.ttf" id="2_6fobd"]
-[ext_resource type="Texture2D" uid="uid://1ymhj6ymx0pe" path="res://assets/knight.png" id="2_gaqnm"]
+[ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_2l0w0"]
+[ext_resource type="Texture2D" uid="uid://cghthyraa64lp" path="res://assets/logo.png" id="2_65rpw"]
+[ext_resource type="FontFile" uid="uid://0fq4hhdq1a0b" path="res://assets/PixelifySans-VariableFont_wght.ttf" id="3_1mfqs"]
+[ext_resource type="Texture2D" uid="uid://d83d15a5uhal" path="res://assets/lech.png" id="4_0gack"]
+[ext_resource type="Texture2D" uid="uid://1ymhj6ymx0pe" path="res://assets/knight.png" id="5_m44ks"]
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3
@@ -12,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_2l0w0")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -30,7 +32,7 @@ offset_bottom = 319.0
 
 [node name="Logo" type="Sprite2D" parent="Panel"]
 position = Vector2(371, 158)
-texture = ExtResource("1_paqby")
+texture = ExtResource("2_65rpw")
 
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 0
@@ -45,28 +47,32 @@ layout_mode = 2
 
 [node name="Play" type="Button" parent="GridContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_6fobd")
+theme_override_fonts/font = ExtResource("3_1mfqs")
 theme_override_font_sizes/font_size = 18
 text = "Play"
 
 [node name="Settings" type="Button" parent="GridContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_6fobd")
+theme_override_fonts/font = ExtResource("3_1mfqs")
 text = "Settings"
 
 [node name="Exit" type="Button" parent="GridContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_6fobd")
+theme_override_fonts/font = ExtResource("3_1mfqs")
 text = "Exit
 "
 
 [node name="Lech" type="Sprite2D" parent="."]
 position = Vector2(1605, 664)
 scale = Vector2(52.0625, 52.0625)
-texture = ExtResource("1_2elp0")
+texture = ExtResource("4_0gack")
 
 [node name="Knight" type="Sprite2D" parent="."]
 position = Vector2(1008, 899)
 scale = Vector2(22.1875, 22.1875)
-texture = ExtResource("2_gaqnm")
+texture = ExtResource("5_m44ks")
 flip_h = true
+
+[connection signal="pressed" from="GridContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="GridContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="GridContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
