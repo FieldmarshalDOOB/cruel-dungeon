@@ -2,7 +2,7 @@ extends CharacterBody2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 var hp:int  = 100 #Жизни игрока
-var hp_regeneration:float = 0.5 #Реген хп в секунду
+var hp_regeneration:int = 1 #Реген хп в секунду
 var xp:int = 0
 var speed:int = 50 #Скорость перса
 

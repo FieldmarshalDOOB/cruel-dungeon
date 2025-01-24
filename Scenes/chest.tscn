@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://m2dk567opyy2"]
+[gd_scene load_steps=9 format=3 uid="uid://m2dk567opyy2"]
 
 [ext_resource type="Texture2D" uid="uid://c1tjylfw4kp54" path="res://assets/02_Tiles.png" id="1_4g45e"]
+[ext_resource type="Script" path="res://Scripts/chest.gd" id="1_whruu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lmuhv"]
 atlas = ExtResource("1_4g45e")
@@ -44,6 +45,7 @@ size = Vector2(26, 20)
 
 [node name="Chest" type="StaticBody2D"]
 y_sort_enabled = true
+script = ExtResource("1_whruu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 modulate = Color(0.473976, 0.473976, 0.473976, 1)
@@ -56,15 +58,16 @@ frame = 1
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 y_sort_enabled = true
 position = Vector2(0, -2.5)
 shape = SubResource("RectangleShape2D_08dm0")
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 
 [node name="open_chest" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_1c7w7")
 debug_color = Color(0.22064, 0.623091, 0.410432, 0.42)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
