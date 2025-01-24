@@ -13,13 +13,17 @@ script = ExtResource("1_key33")
 
 [node name="Retry" type="Button" parent="."]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 83.0
+offset_top = 31.0
+offset_right = 91.0
+offset_bottom = 39.0
 
 [node name="Main menu" type="Button" parent="."]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 51.0
+offset_top = 60.0
+offset_right = 59.0
+offset_bottom = 68.0
 
 [connection signal="pressed" from="Retry" to="." method="_on_retry_pressed"]
 [connection signal="pressed" from="Main menu" to="." method="_on_main_menu_pressed"]
