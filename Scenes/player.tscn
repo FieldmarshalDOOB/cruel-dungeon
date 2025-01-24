@@ -1,0 +1,107 @@
+[gd_scene load_steps=11 format=3 uid="uid://bpwkyme4k0xh8"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_wrtln"]
+[ext_resource type="Texture2D" uid="uid://bkvid713q4id8" path="res://assets/spritesheet_skeleton_and_knight_idle.png" id="2_7wmvt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vkj8i"]
+atlas = ExtResource("2_7wmvt")
+region = Rect2(0, 64, 38, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k2lb3"]
+atlas = ExtResource("2_7wmvt")
+region = Rect2(38, 64, 38, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ohnfq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vkj8i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k2lb3")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pdq2x"]
+radius = 3.0
+height = 12.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6tbnj"]
+radius = 80.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4e3km"]
+radius = 11.0454
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ldhm1"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yepdr"]
+bg_color = Color(0, 0.605261, 0.0653211, 1)
+
+[node name="Player" type="CharacterBody2D"]
+y_sort_enabled = true
+collision_layer = 3
+motion_mode = 1
+platform_on_leave = 2
+platform_floor_layers = 0
+script = ExtResource("1_wrtln")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -5)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_ohnfq")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.203011
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 2)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_pdq2x")
+
+[node name="Player_vision" type="Area2D" parent="."]
+visible = false
+
+[node name="vison_cirlce" type="CollisionShape2D" parent="Player_vision"]
+shape = SubResource("CircleShape2D_6tbnj")
+debug_color = Color(0, 0.650325, 0.0995586, 0.42)
+
+[node name="player_hitbox" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_hitbox"]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_4e3km")
+debug_color = Color(0.992719, 0, 0.248068, 0.42)
+
+[node name="attack_cooldown" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="deal_attack_timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="hp_regen" type="Timer" parent="."]
+autostart = true
+
+[node name="player_hp_bar" type="ProgressBar" parent="."]
+visible = false
+offset_left = -10.0
+offset_top = -16.0
+offset_right = 10.0
+offset_bottom = -14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_ldhm1")
+theme_override_styles/fill = SubResource("StyleBoxFlat_yepdr")
+value = 100.0
+show_percentage = false
+
+[connection signal="body_entered" from="player_hitbox" to="." method="_on_player_hitbox_body_entered"]
+[connection signal="body_exited" from="player_hitbox" to="." method="_on_player_hitbox_body_exited"]
+[connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="deal_attack_timer" to="." method="_on_deal_attack_timer_timeout"]
+[connection signal="timeout" from="hp_regen" to="." method="_on_hp_regen_timeout"]
