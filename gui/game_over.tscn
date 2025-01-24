@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://cq71h2siytbm6"]
+[gd_scene load_steps=2 format=3 uid="uid://cq71h2siytbm6"]
+
+[ext_resource type="Script" path="res://Scripts/game_over.gd" id="1_key33"]
 
 [node name="game_over" type="Control"]
 layout_mode = 3
@@ -7,3 +9,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_key33")
+
+[node name="Retry" type="Button" parent="."]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Main menu" type="Button" parent="."]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[connection signal="pressed" from="Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="Main menu" to="." method="_on_main_menu_pressed"]
