@@ -1,15 +1,17 @@
 extends CharacterBody2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
+var hp:int  = 100 #Жизни игрока
+var hp_regeneration:float = 0.5 #Реген хп в секунду
+var xp:int = 0
+var speed:int = 50 #Скорость перса
 
-var speed = 50 #Скорость перса
-var target = Vector2(-439,224) #Куда бежит перс в начале
-var enemy_in_attack_range = false
-var enemy_attack_cooldown = true
-var hp = 100 #Жизни игрока
-var player_alive = true
-var attack_ip = false
-var hp_regeneration = 0.5 #Реген хп в секунду
+var target:Vector2 = Vector2(-439,224) #Куда бежит перс в начале
+var enemy_in_attack_range:bool = false
+var enemy_attack_cooldown:bool = true
+var player_alive:bool = true
+var attack_ip:bool = false
+
 
 func _physics_process(_delta): 
 	enemy_attack()
