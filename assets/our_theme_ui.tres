@@ -1,9 +1,36 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bowu0aaocj0rh"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://bowu0aaocj0rh"]
 
 [ext_resource type="FontFile" uid="uid://j0xxybnmmab3" path="res://assets/Jacquard12-Regular.ttf" id="1_0rjbc"]
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ixmy5"]
+load_path = "res://.godot/imported/GUI.png-6ec60869b89e736b1f049e40f55b28d4.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lyq3t"]
+texture = SubResource("CompressedTexture2D_ixmy5")
+region_rect = Rect2(144.896, 80.9297, 46.1765, 14.1839)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_27l2n"]
+texture = SubResource("CompressedTexture2D_ixmy5")
+region_rect = Rect2(144.8, 97.7045, 46.3907, 13.4526)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pc7n7"]
+texture = SubResource("CompressedTexture2D_ixmy5")
+region_rect = Rect2(144.896, 80.9297, 46.1765, 14.1839)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3gxmp"]
+texture = SubResource("CompressedTexture2D_ixmy5")
+region_rect = Rect2(144.8, 97.7045, 46.3907, 13.4526)
+
 [resource]
 default_font_size = 0
+Button/colors/font_color = Color(0.8, 0.8, 0.8, 1)
+Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+Button/font_sizes/font_size = 26
+Button/styles/focus = null
+Button/styles/hover = SubResource("StyleBoxTexture_lyq3t")
+Button/styles/hover_pressed = SubResource("StyleBoxTexture_27l2n")
+Button/styles/normal = SubResource("StyleBoxTexture_pc7n7")
+Button/styles/pressed = SubResource("StyleBoxTexture_3gxmp")
 Label/colors/font_color = Color(0.94, 0.94, 0.94, 1)
-Label/font_sizes/font_size = 54
+Label/font_sizes/font_size = 90
 Label/fonts/font = ExtResource("1_0rjbc")
