@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=4 uid="uid://brtqkwjtvg8f0"]
+[gd_scene load_steps=10 format=4 uid="uid://brtqkwjtvg8f0"]
 
+[ext_resource type="PackedScene" uid="uid://cfff7n4hhovwj" path="res://Scenes/gui.tscn" id="1_cmep1"]
 [ext_resource type="Texture2D" uid="uid://c1tjylfw4kp54" path="res://assets/02_Tiles.png" id="3_3x8cq"]
 [ext_resource type="PackedScene" uid="uid://bpwkyme4k0xh8" path="res://Scenes/player.tscn" id="3_xq144"]
 [ext_resource type="Texture2D" uid="uid://cs1u7foqw2kxy" path="res://assets/ogr.png" id="5_y76ql"]
@@ -839,6 +840,12 @@ sources/0 = SubResource("TileSetAtlasSource_y4rav")
 
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
+
+[node name="GUI" parent="." instance=ExtResource("1_cmep1")]
+offset_left = -439.0
+offset_top = 224.0
+offset_right = -439.0
+offset_bottom = 224.0
 
 [node name="walls" type="TileMapLayer" parent="."]
 y_sort_enabled = true

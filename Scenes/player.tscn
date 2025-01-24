@@ -97,7 +97,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/background = SubResource("StyleBoxFlat_ldhm1")
 theme_override_styles/fill = SubResource("StyleBoxFlat_yepdr")
-value = 100.0
 show_percentage = false
 
 [connection signal="body_entered" from="player_hitbox" to="." method="_on_player_hitbox_body_entered"]
