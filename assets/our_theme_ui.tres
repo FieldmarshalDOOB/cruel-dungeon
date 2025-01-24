@@ -1,3 +1,9 @@
-[gd_resource type="Theme" format=3 uid="uid://bowu0aaocj0rh"]
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bowu0aaocj0rh"]
+
+[ext_resource type="FontFile" uid="uid://j0xxybnmmab3" path="res://assets/Jacquard12-Regular.ttf" id="1_0rjbc"]
 
 [resource]
+default_font_size = 0
+Label/colors/font_color = Color(0.94, 0.94, 0.94, 1)
+Label/font_sizes/font_size = 54
+Label/fonts/font = ExtResource("1_0rjbc")
