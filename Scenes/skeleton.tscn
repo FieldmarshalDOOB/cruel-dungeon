@@ -201,6 +201,7 @@ debug_color = Color(0.988597, 0, 0.300187, 0.42)
 wait_time = 0.5
 
 [node name="skeleton_hp_bar" type="ProgressBar" parent="."]
+visible = false
 offset_left = -10.0
 offset_top = -16.0
 offset_right = 10.0
