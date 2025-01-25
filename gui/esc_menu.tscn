@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://csn5qxp7bf3om"]
+[gd_scene load_steps=4 format=3 uid="uid://csn5qxp7bf3om"]
 
 [ext_resource type="Script" path="res://gui/esc_menu.gd" id="1_ftx1u"]
 [ext_resource type="Texture2D" uid="uid://cpc0wk3fjjc8n" path="res://gui/плашка для меню.png" id="1_n18er"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wdpx0"]
+bg_color = Color(0.0392157, 0.0392157, 0.0392157, 0.784314)
 
 [node name="esc_menu" type="Control"]
 layout_mode = 3
@@ -23,6 +26,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wdpx0")
 
 [node name="TextureRect" type="TextureRect" parent="esc_menu_canvas/Panel"]
 layout_mode = 1
