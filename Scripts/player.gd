@@ -1,5 +1,6 @@
 extends CharacterBody2D
 @onready var player_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var sword = $Sword
 
 var hp:int  = 10 #Жизни игрока
 var hp_regeneration:int = 1 #Реген хп в секунду
@@ -7,7 +8,7 @@ var xp:int = 0 #Опыт
 var speed:int = 50 #Скорость перса
 var target:Vector2 = Vector2(-439,224) #Куда бежит перс в начале
 var player_alive:bool = true #Живой?
-
+var attack_range = 12 #Должен быть как радиус хитбокса
 
 func _physics_process(_delta): 
 	#update_health()
@@ -50,3 +51,17 @@ func _on_hp_regen_timeout() -> void:
 			hp = 100
 	if hp <= 0:
 		hp = 0
+
+
+func _on_player_hitbox_body_entered(body):
+	var enemies = get_tree().get_nodes_in_group("enemy")
+	body = enemies
+	enemies = enemies.filter(func(enemy:Node2D):
+		return enemy.global_position.distance_squared_to(global_position) < pow(attack_range, 2))
+	if enemies.size() == 0:
+		return
+	enemies.sort_custom(func(a:Node2D, b:Node2D):
+		var a_dis = a.global_position.distance_squared_to(global_position)
+		var b_dis = b.global_position.distance_squared_to(global_position)
+		return a_dis < b_dis)
+	$AnimationPlayer.play("attack_animation")

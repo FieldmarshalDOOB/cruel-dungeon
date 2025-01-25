@@ -2,13 +2,11 @@ extends Node
 
 @export var spawn_ability: PackedScene
 
+@onready var player_hitbox = $"../../player_hitbox"
 @onready var player = get_tree().get_first_node_in_group("player") as Node2D
 
 var spawn_point:Vector2
 var cooldown:bool
-
-func _process(_delta):
-	pass
 
 
 func _input(_event):

@@ -182,7 +182,7 @@ collision_mask = 2
 shape = SubResource("CircleShape2D_7t11k")
 debug_color = Color(0.191958, 0.641356, 0.0549405, 0.42)
 
-[node name="skeleton_hitbox" type="Area2D" parent="."]
+[node name="skeleton_hitbox" type="Area2D" parent="." groups=["enemy"]]
 visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="skeleton_hitbox"]
@@ -196,7 +196,7 @@ sprite_frames = SubResource("SpriteFrames_aew5h")
 animation = &"attack"
 autoplay = "idle"
 
-[node name="Shadow" type="Sprite2D" parent="AnimatedSprite2D" groups=["enemies"]]
+[node name="Shadow" type="Sprite2D" parent="AnimatedSprite2D"]
 modulate = Color(0, 0, 0, 0.564706)
 show_behind_parent = true
 y_sort_enabled = true
