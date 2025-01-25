@@ -1,16 +1,17 @@
 extends CharacterBody2D
 @onready var skeleton_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var player = get_tree().get_first_node_in_group("player") as Node2D
 
-var speed = 70 #Чем выше тем медленее - мы делем на скокрость
-var player_chaise = false
+var speed = 30
 var hp = 100
+var player_chaise : bool
 
-
-func _physics_process(_delta: float) -> void:
+func _process(_delta):
 	update_health()
-	var player = get_tree().get_first_node_in_group("player") as Node2D
 	if player_chaise:
-		position += (player.position - position)/speed
+		var direction = get_direction_to_player()
+		velocity = speed * direction
+		move_and_slide()
 		skeleton_sprite.play("walk")
 		if (player.position.x - position.x) < 0:
 			skeleton_sprite.flip_h = true
@@ -18,6 +19,13 @@ func _physics_process(_delta: float) -> void:
 			skeleton_sprite.flip_h = false
 	else:
 		skeleton_sprite.play("idle")
+
+
+func get_direction_to_player():
+	if player != null:
+		return (player.global_position - global_position).normalized()
+	else:
+		return Vector2.ZERO
 
 
 func update_health():
@@ -30,23 +38,16 @@ func update_health():
 		hp_bar.visible = true
 
 
-@warning_ignore("unused_parameter")
-func _on_detection_area_body_entered(body: Node2D):
-	body = get_tree().get_first_node_in_group("player") as Node2D
+func _on_skeleton_detection_area_body_entered(_body):
+	_body = player
 	player_chaise = true
 
 
-@warning_ignore("unused_parameter")
-func _on_detection_area_body_exited(body: Node2D):
-	body = null
+func _on_skeleton_detection_area_body_exited(_body):
+	_body = player
 	player_chaise = false
 
 
-@warning_ignore("unused_parameter")
-func _on_enemy_hitbox_body_entered(body: Node2D):
-	body = get_tree().get_first_node_in_group("player") as Node2D
-
-
-@warning_ignore("unused_parameter")
-func _on_enemy_hitbox_body_exited(body: Node2D):
-	body = get_tree().get_first_node_in_group("player") as Node2D
+func _on_skeleton_hitbox_body_entered(_body):
+	_body = player
+	#Скелет должен нанести урон
