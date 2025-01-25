@@ -1,7 +1,18 @@
-[gd_scene load_steps=11 format=3 uid="uid://bpwkyme4k0xh8"]
+[gd_scene load_steps=12 format=3 uid="uid://bpwkyme4k0xh8"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_wrtln"]
 [ext_resource type="Texture2D" uid="uid://bkvid713q4id8" path="res://assets/spritesheet_skeleton_and_knight_idle.png" id="2_7wmvt"]
+[ext_resource type="Texture2D" uid="uid://dugnkqt6m3wk6" path="res://assets/ground_shadow.png" id="3_6tj3q"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pdq2x"]
+radius = 3.0
+height = 12.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6tbnj"]
+radius = 80.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4e3km"]
+radius = 11.0454
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vkj8i"]
 atlas = ExtResource("2_7wmvt")
@@ -21,19 +32,53 @@ animations = [{
 "texture": SubResource("AtlasTexture_k2lb3")
 }],
 "loop": true,
+"name": &"died",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vkj8i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k2lb3")
+}],
+"loop": true,
+"name": &"hit",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vkj8i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k2lb3")
+}],
+"loop": true,
 "name": &"idle",
 "speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vkj8i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k2lb3")
+}],
+"loop": true,
+"name": &"take_dmg",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vkj8i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k2lb3")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 3.0
 }]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pdq2x"]
-radius = 3.0
-height = 12.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_6tbnj"]
-radius = 80.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_4e3km"]
-radius = 11.0454
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ldhm1"]
 bg_color = Color(0, 0, 0, 1)
@@ -49,17 +94,8 @@ platform_on_leave = 2
 platform_floor_layers = 0
 script = ExtResource("1_wrtln")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(1, -5)
-scale = Vector2(0.5, 0.5)
-sprite_frames = SubResource("SpriteFrames_ohnfq")
-animation = &"idle"
-autoplay = "idle"
-frame_progress = 0.203011
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2(0, 2)
 rotation = -1.5708
 shape = SubResource("CapsuleShape2D_pdq2x")
 
@@ -74,7 +110,7 @@ debug_color = Color(0, 0.650325, 0.0995586, 0.42)
 visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_hitbox"]
-position = Vector2(0, 1)
+visible = false
 shape = SubResource("CircleShape2D_4e3km")
 debug_color = Color(0.992719, 0, 0.248068, 0.42)
 
@@ -87,17 +123,33 @@ wait_time = 0.5
 [node name="hp_regen" type="Timer" parent="."]
 autostart = true
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_ohnfq")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="Shadow" type="Sprite2D" parent="AnimatedSprite2D"]
+modulate = Color(0, 0, 0, 0.564706)
+show_behind_parent = true
+y_sort_enabled = true
+position = Vector2(2, 16)
+scale = Vector2(0.32967, 0.0769231)
+texture = ExtResource("3_6tj3q")
+offset = Vector2(-6, 0)
+
 [node name="player_hp_bar" type="ProgressBar" parent="."]
-visible = false
 offset_left = -10.0
-offset_top = -16.0
+offset_top = -19.0
 offset_right = 10.0
-offset_bottom = -14.0
+offset_bottom = -17.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/background = SubResource("StyleBoxFlat_ldhm1")
 theme_override_styles/fill = SubResource("StyleBoxFlat_yepdr")
 show_percentage = false
+metadata/_edit_use_anchors_ = true
 
 [connection signal="body_entered" from="player_hitbox" to="." method="_on_player_hitbox_body_entered"]
 [connection signal="body_exited" from="player_hitbox" to="." method="_on_player_hitbox_body_exited"]
