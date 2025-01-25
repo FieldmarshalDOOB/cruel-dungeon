@@ -1,4 +1,10 @@
-[gd_scene format=3 uid="uid://crgx7aveoso2g"]
+[gd_scene load_steps=4 format=3 uid="uid://crgx7aveoso2g"]
+
+[ext_resource type="Texture2D" uid="uid://cpc0wk3fjjc8n" path="res://gui/плашка для меню.png" id="1_0xj7b"]
+[ext_resource type="FontFile" uid="uid://cnmextj1qrp23" path="res://assets/PixeloidSans.ttf" id="2_m8cal"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sktsu"]
+bg_color = Color(0.0392157, 0.0392157, 0.0392157, 0.784314)
 
 [node name="settings" type="Control"]
 layout_mode = 3
@@ -7,3 +13,99 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="settings_canvas" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="settings_canvas"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sktsu")
+
+[node name="TextureRect" type="TextureRect" parent="settings_canvas/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -292.0
+offset_top = -251.0
+offset_right = 292.0
+offset_bottom = 251.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_0xj7b")
+
+[node name="Container" type="VBoxContainer" parent="settings_canvas/Panel/TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -114.988
+offset_right = 175.0
+offset_bottom = 98.988
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="settings_canvas/Panel/TextureRect/Container"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Labels" type="VBoxContainer" parent="settings_canvas/Panel/TextureRect/Container/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Label" type="Label" parent="settings_canvas/Panel/TextureRect/Container/HBoxContainer/Labels"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_m8cal")
+theme_override_font_sizes/font_size = 26
+text = "Volume"
+
+[node name="Label2" type="Label" parent="settings_canvas/Panel/TextureRect/Container/HBoxContainer/Labels"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_m8cal")
+theme_override_font_sizes/font_size = 26
+text = "SFX"
+
+[node name="Lines" type="VBoxContainer" parent="settings_canvas/Panel/TextureRect/Container/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="HSlider" type="HSlider" parent="settings_canvas/Panel/TextureRect/Container/HBoxContainer/Lines"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="HSlider2" type="HSlider" parent="settings_canvas/Panel/TextureRect/Container/HBoxContainer/Lines"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+
+[node name="CheckBox" type="CheckBox" parent="settings_canvas/Panel/TextureRect/Container"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/icon_max_width = 40
+text = "Full Screen"
+icon_alignment = 2
+expand_icon = true
+text_direction = 1
+
+[node name="Button" type="Button" parent="settings_canvas/Panel/TextureRect/Container"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Return"
