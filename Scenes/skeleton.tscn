@@ -189,20 +189,12 @@ visible = false
 shape = SubResource("CircleShape2D_m7l6a")
 debug_color = Color(0.988597, 0, 0.300187, 0.42)
 
-[node name="take_damage_cooldown" type="Timer" parent="."]
-wait_time = 0.5
-
-[node name="hp_regen" type="Timer" parent="."]
-wait_time = 3.0
-autostart = true
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(2, -8)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_aew5h")
-animation = &"idle"
+animation = &"attack"
 autoplay = "idle"
-frame_progress = 0.406921
 
 [node name="Shadow" type="Sprite2D" parent="AnimatedSprite2D" groups=["enemies"]]
 modulate = Color(0, 0, 0, 0.564706)
@@ -230,5 +222,3 @@ metadata/_edit_use_anchors_ = true
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
 [connection signal="body_entered" from="enemy_hitbox" to="." method="_on_enemy_hitbox_body_entered"]
 [connection signal="body_exited" from="enemy_hitbox" to="." method="_on_enemy_hitbox_body_exited"]
-[connection signal="timeout" from="take_damage_cooldown" to="." method="_on_take_damage_cooldown_timeout"]
-[connection signal="timeout" from="hp_regen" to="." method="_on_hp_regen_timeout"]
