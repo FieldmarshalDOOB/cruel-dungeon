@@ -86,7 +86,7 @@ bg_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yepdr"]
 bg_color = Color(0, 0.605261, 0.0653211, 1)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 y_sort_enabled = true
 collision_layer = 3
 motion_mode = 1
@@ -140,6 +140,7 @@ texture = ExtResource("3_6tj3q")
 offset = Vector2(-6, 0)
 
 [node name="player_hp_bar" type="ProgressBar" parent="."]
+visible = false
 offset_left = -10.0
 offset_top = -19.0
 offset_right = 10.0
@@ -150,6 +151,16 @@ theme_override_styles/background = SubResource("StyleBoxFlat_ldhm1")
 theme_override_styles/fill = SubResource("StyleBoxFlat_yepdr")
 show_percentage = false
 metadata/_edit_use_anchors_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(6, 6)
+limit_left = -480
+limit_top = -275
+limit_right = 480
+limit_bottom = 272
+limit_smoothed = true
+position_smoothing_enabled = true
+editor_draw_limits = true
 
 [connection signal="body_entered" from="player_hitbox" to="." method="_on_player_hitbox_body_entered"]
 [connection signal="body_exited" from="player_hitbox" to="." method="_on_player_hitbox_body_exited"]

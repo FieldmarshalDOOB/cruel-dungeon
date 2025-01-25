@@ -204,7 +204,7 @@ animation = &"idle"
 autoplay = "idle"
 frame_progress = 0.406921
 
-[node name="Shadow" type="Sprite2D" parent="AnimatedSprite2D"]
+[node name="Shadow" type="Sprite2D" parent="AnimatedSprite2D" groups=["enemies"]]
 modulate = Color(0, 0, 0, 0.564706)
 show_behind_parent = true
 y_sort_enabled = true
