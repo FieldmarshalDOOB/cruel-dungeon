@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cq71h2siytbm6"]
+[gd_scene load_steps=4 format=3 uid="uid://cq71h2siytbm6"]
 
 [ext_resource type="Script" path="res://Scripts/game_over.gd" id="1_key33"]
+[ext_resource type="Texture2D" uid="uid://cpc0wk3fjjc8n" path="res://gui/плашка для меню.png" id="2_6o70e"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rsk37"]
 bg_color = Color(0.04, 0.04, 0.04, 0.784314)
@@ -32,10 +33,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -175.0
-offset_top = -170.0
-offset_right = 175.0
-offset_bottom = 114.0
+offset_left = -263.5
+offset_top = -277.0
+offset_right = 263.5
+offset_bottom = 245.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 36
@@ -50,23 +51,40 @@ text = "You Died"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Buttons" type="VBoxContainer" parent="game_over_canvas/Panel/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="game_over_canvas/Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+mouse_filter = 2
+texture = ExtResource("2_6o70e")
+
+[node name="Buttons" type="VBoxContainer" parent="game_over_canvas/Panel/VBoxContainer/TextureRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.496
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -173.0
+offset_top = -91.352
+offset_right = 177.0
+offset_bottom = 107.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="Retry" type="Button" parent="game_over_canvas/Panel/VBoxContainer/Buttons"]
+[node name="Retry" type="Button" parent="game_over_canvas/Panel/VBoxContainer/TextureRect/Buttons"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_default_cursor_shape = 2
 text = "Retry"
 
-[node name="Main menu" type="Button" parent="game_over_canvas/Panel/VBoxContainer/Buttons"]
+[node name="Main menu" type="Button" parent="game_over_canvas/Panel/VBoxContainer/TextureRect/Buttons"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_default_cursor_shape = 2
 text = "Main menu"
 
-[connection signal="pressed" from="game_over_canvas/Panel/VBoxContainer/Buttons/Retry" to="." method="_on_retry_pressed"]
-[connection signal="pressed" from="game_over_canvas/Panel/VBoxContainer/Buttons/Main menu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="game_over_canvas/Panel/VBoxContainer/TextureRect/Buttons/Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="game_over_canvas/Panel/VBoxContainer/TextureRect/Buttons/Main menu" to="." method="_on_main_menu_pressed"]
