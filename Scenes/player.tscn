@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://bpwkyme4k0xh8"]
+[gd_scene load_steps=13 format=3 uid="uid://bpwkyme4k0xh8"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_wrtln"]
 [ext_resource type="Texture2D" uid="uid://bkvid713q4id8" path="res://assets/spritesheet_skeleton_and_knight_idle.png" id="2_7wmvt"]
+[ext_resource type="PackedScene" uid="uid://bwtsuyg2uk0u8" path="res://Scenes/ability_controller.tscn" id="2_klj25"]
 [ext_resource type="Texture2D" uid="uid://dugnkqt6m3wk6" path="res://assets/ground_shadow.png" id="3_6tj3q"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pdq2x"]
@@ -93,6 +94,10 @@ motion_mode = 1
 platform_on_leave = 2
 platform_floor_layers = 0
 script = ExtResource("1_wrtln")
+
+[node name="AbilityManager" type="Node" parent="."]
+
+[node name="AbilityController" parent="AbilityManager" instance=ExtResource("2_klj25")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
