@@ -4,11 +4,11 @@ extends CharacterBody2D
 var speed = 70 #Чем выше тем медленее - мы делем на скокрость
 var player_chaise = false
 var hp = 100
-var player = get_tree().get_first_node_in_group("player") as Node2D
+
 
 func _physics_process(_delta: float) -> void:
 	update_health()
-	
+	var player = get_tree().get_first_node_in_group("player") as Node2D
 	if player_chaise:
 		position += (player.position - position)/speed
 		skeleton_sprite.play("walk")
@@ -31,20 +31,24 @@ func update_health():
 
 
 func _on_detection_area_body_entered(body: Node2D):
+	var player = get_tree().get_first_node_in_group("player") as Node2D
 	player = body
 	player_chaise = true
 
 
 func _on_detection_area_body_exited(_body: Node2D):
+	var player = get_tree().get_first_node_in_group("player") as Node2D
 	player = null
 	player_chaise = false
 
 
 func _on_enemy_hitbox_body_entered(body: Node2D):
+	var player = get_tree().get_first_node_in_group("player") as Node2D
 	if body == player:
 		pass
 
 
 func _on_enemy_hitbox_body_exited(body: Node2D):
+	var player = get_tree().get_first_node_in_group("player") as Node2D
 	if body == player:
 		pass
