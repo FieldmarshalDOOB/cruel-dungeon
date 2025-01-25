@@ -30,25 +30,23 @@ func update_health():
 		hp_bar.visible = true
 
 
+@warning_ignore("unused_parameter")
 func _on_detection_area_body_entered(body: Node2D):
-	var player = get_tree().get_first_node_in_group("player") as Node2D
-	player = body
+	body = get_tree().get_first_node_in_group("player") as Node2D
 	player_chaise = true
 
 
-func _on_detection_area_body_exited(_body: Node2D):
-	var player = get_tree().get_first_node_in_group("player") as Node2D
-	player = null
+@warning_ignore("unused_parameter")
+func _on_detection_area_body_exited(body: Node2D):
+	body = null
 	player_chaise = false
 
 
+@warning_ignore("unused_parameter")
 func _on_enemy_hitbox_body_entered(body: Node2D):
-	var player = get_tree().get_first_node_in_group("player") as Node2D
-	if body == player:
-		pass
+	body = get_tree().get_first_node_in_group("player") as Node2D
 
 
+@warning_ignore("unused_parameter")
 func _on_enemy_hitbox_body_exited(body: Node2D):
-	var player = get_tree().get_first_node_in_group("player") as Node2D
-	if body == player:
-		pass
+	body = get_tree().get_first_node_in_group("player") as Node2D
