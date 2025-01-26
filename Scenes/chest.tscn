@@ -1,41 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://m2dk567opyy2"]
+[gd_scene load_steps=8 format=3 uid="uid://m2dk567opyy2"]
 
 [ext_resource type="Texture2D" uid="uid://c1tjylfw4kp54" path="res://assets/02_Tiles.png" id="1_4g45e"]
 [ext_resource type="Script" path="res://Scripts/chest.gd" id="1_whruu"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lmuhv"]
-atlas = ExtResource("1_4g45e")
-region = Rect2(208, 384, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1ipvp"]
-atlas = ExtResource("1_4g45e")
-region = Rect2(208, 384, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_casum"]
-atlas = ExtResource("1_4g45e")
-region = Rect2(208, 352, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_jf5y7"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lmuhv")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 1.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1ipvp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_casum")
-}],
-"loop": false,
-"name": &"open",
-"speed": 2.0
-}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_08dm0"]
 size = Vector2(16, 7)
@@ -43,33 +9,116 @@ size = Vector2(16, 7)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1c7w7"]
 size = Vector2(26, 20)
 
-[node name="Chest" type="StaticBody2D"]
+[sub_resource type="Animation" id="Animation_5ny3p"]
+resource_name = "chest_looting"
+length = 0.5
+step = 0.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.499605),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ChestClosed:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.251493),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ChestOpend:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.251493),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_asisg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ChestClosed:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ChestOpend:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iinyo"]
+_data = {
+"RESET": SubResource("Animation_asisg"),
+"chest_looting": SubResource("Animation_5ny3p")
+}
+
+[node name="Chest" type="StaticBody2D" groups=["chest"]]
 y_sort_enabled = true
 script = ExtResource("1_whruu")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-modulate = Color(0.473976, 0.473976, 0.473976, 1)
-y_sort_enabled = true
-position = Vector2(0, -7)
-sprite_frames = SubResource("SpriteFrames_jf5y7")
-animation = &"open"
-autoplay = "idle"
-frame = 1
-frame_progress = 1.0
+[node name="ChestOpend" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -8)
+texture = ExtResource("1_4g45e")
+region_enabled = true
+region_rect = Rect2(208, 353, 16, 15)
+
+[node name="ChestClosed" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_4g45e")
+region_enabled = true
+region_rect = Rect2(208, 385, 16, 15)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 y_sort_enabled = true
 position = Vector2(0, -2.5)
 shape = SubResource("RectangleShape2D_08dm0")
 
-[node name="Area2D" type="Area2D" parent="."]
-visible = false
+[node name="ChestLootZone" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
 
-[node name="open_chest" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChestLootZone"]
 position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_1c7w7")
 debug_color = Color(0.22064, 0.623091, 0.410432, 0.42)
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_iinyo")
+}
+
+[connection signal="body_entered" from="ChestLootZone" to="." method="_on_chest_loot_zone_body_entered"]

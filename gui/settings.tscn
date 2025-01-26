@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://crgx7aveoso2g"]
+[gd_scene load_steps=5 format=3 uid="uid://crgx7aveoso2g"]
 
 [ext_resource type="Texture2D" uid="uid://cpc0wk3fjjc8n" path="res://gui/плашка для меню.png" id="1_0xj7b"]
+[ext_resource type="Script" path="res://gui/settings.gd" id="1_hii3q"]
 [ext_resource type="FontFile" uid="uid://cnmextj1qrp23" path="res://assets/PixeloidSans.ttf" id="2_m8cal"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sktsu"]
@@ -13,6 +14,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_hii3q")
 
 [node name="settings_canvas" type="CanvasLayer" parent="."]
 
@@ -86,17 +88,17 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 24
 alignment = 1
 
-[node name="HSlider" type="HSlider" parent="settings_canvas/Panel/TextureRect/Container/HBoxContainer/Lines"]
+[node name="Volume" type="HSlider" parent="settings_canvas/Panel/TextureRect/Container/HBoxContainer/Lines"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
-[node name="HSlider2" type="HSlider" parent="settings_canvas/Panel/TextureRect/Container/HBoxContainer/Lines"]
+[node name="SFX" type="HSlider" parent="settings_canvas/Panel/TextureRect/Container/HBoxContainer/Lines"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 
-[node name="CheckBox" type="CheckBox" parent="settings_canvas/Panel/TextureRect/Container"]
+[node name="FullScreen" type="CheckBox" parent="settings_canvas/Panel/TextureRect/Container"]
 layout_mode = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/icon_max_width = 40
@@ -105,7 +107,13 @@ icon_alignment = 2
 expand_icon = true
 text_direction = 1
 
-[node name="Button" type="Button" parent="settings_canvas/Panel/TextureRect/Container"]
+[node name="Return" type="Button" parent="settings_canvas/Panel/TextureRect/Container"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Return"
+
+[connection signal="value_changed" from="settings_canvas/Panel/TextureRect/Container/HBoxContainer/Lines/Volume" to="." method="_on_volume_value_changed"]
+[connection signal="value_changed" from="settings_canvas/Panel/TextureRect/Container/HBoxContainer/Lines/SFX" to="." method="_on_sfx_value_changed"]
+[connection signal="button_down" from="settings_canvas/Panel/TextureRect/Container/FullScreen" to="." method="_on_full_screen_button_down"]
+[connection signal="button_up" from="settings_canvas/Panel/TextureRect/Container/FullScreen" to="." method="_on_full_screen_button_up"]
+[connection signal="pressed" from="settings_canvas/Panel/TextureRect/Container/Return" to="." method="_on_return_pressed"]

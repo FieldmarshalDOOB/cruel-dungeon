@@ -1,43 +1,62 @@
 extends CharacterBody2D
 @onready var player_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var navigation_agent_2d : NavigationAgent2D = $NavigationAgent2D
+@onready var end_target : Area2D = $"../end_target"
 
-var hp:int  = 10 #Жизни игрока
-var hp_regen:int = 1 #Реген хп в секунду
-var mana = 100 #Maнa
-var mana_regen:int = 1 #Реген маны в секунду
-var xp:int = 0 #Опыт
-var speed:int = 50 #Скорость перса
-var target:Vector2 = Vector2(-439,224) #Куда бежит перс в начале
-var player_alive:bool = true #Живой?
-var attack_range = 12 #Должен быть как радиус хитбокса
-var acceleration = .30
+@export var target: Node2D = end_target
 
-func _physics_process(_delta): 
-	#update_health()
+var hp: int  = 10 #Жизни игрока
+var hp_regen: int = 1 #Реген хп в секунду
+var mana: int = 100 #Maнa
+var mana_regen: int = 1 #Реген маны в секунду
+var xp: int = 0 #Опыт
+var speed: int = 50 #Скорость перса
+var player_alive: bool = true #Живой?
+var attack_range: int = 12 #Должен быть как радиус хитбокса
+
+
+func _physics_process(_delta):
+	await get_tree().physics_frame 
+	update_health()
 	if hp <= 0:
 		player_alive = false
 		hp = 0
 		player_sprite.play("death")
 		get_tree().change_scene_to_file("res://gui/game_over.tscn")
-		queue_free()
-	##Заменить всё что ниже на движение к концу уровня
-	if Input.is_action_just_pressed("left_click"): #Движение по клику
-		player_sprite.play("walk")
-		target = get_global_mouse_position()
-	#var target_velocity = speed * acceleration
-	#velocity = position.direction_to(target) * speed
-	var target_velocity = position.direction_to(target) * speed
-	velocity = velocity.lerp(target_velocity, acceleration)
-	#Если цель близко, то тормозит(чтоб не дрожало)
-	if position.distance_to(target) > 5: 
-		move_and_slide()
-	#Поворт спрайтa
-	if position == target: 
-		player_sprite.play("idle")#Неработаит
-	elif position.x > target.x:
-		player_sprite.flip_h = true
-	elif position.x < target.x:
-		player_sprite.flip_h = false
+		get_tree().queue_free()
+		
+	if is_instance_valid(target):#Движение через агента
+		navigation_agent_2d.target_position = target.global_position
+	if navigation_agent_2d.is_navigation_finished():
+		#navigation_agent_2d.target_position = end_target.global_position
+		acquire_target()
+		pass
+
+	var current_agent_position = global_position
+	var next_path_position = navigation_agent_2d.get_next_path_position()
+	velocity = current_agent_position.direction_to(next_path_position) * speed
+	player_sprite.flip_h = false if velocity.x > 0 else true
+	move_and_slide()
+	
+	#if position.x > target.x:#Поворт спрайтa
+		#player_sprite.flip_h = true
+	#elif position.x < target.x:
+		#player_sprite.flip_h = false
+
+
+func _ready():
+	call_deferred("seeker_setup")
+
+
+func seeker_setup():
+	await get_tree().physics_frame
+	if target:
+		navigation_agent_2d.target_position = target.global_position
+
+
+func acquire_target():
+	if !is_instance_valid(target):
+		target = end_target
 
 
 func attack():
@@ -80,3 +99,9 @@ func _on_player_hitbox_body_entered(body):
 	if body == enemy:
 		attack()
 #player_sprite.play("take_dmg")
+
+func _on_player_vision_body_entered(body):
+	if body == get_tree().get_first_node_in_group("chest"):
+		target = body
+	if body == get_tree().get_first_node_in_group("enemy"):
+		target = body

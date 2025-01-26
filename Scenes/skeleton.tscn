@@ -160,9 +160,10 @@ bg_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dgmyy"]
 bg_color = Color(0, 0.605261, 0.0653211, 1)
 
-[node name="Skeleton" type="CharacterBody2D"]
+[node name="Skeleton" type="CharacterBody2D" groups=["enemy"]]
 y_sort_enabled = true
 motion_mode = 1
+wall_min_slide_angle = 0.0
 platform_floor_layers = 0
 script = ExtResource("1_6uy4v")
 

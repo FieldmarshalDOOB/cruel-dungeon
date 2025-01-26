@@ -6,9 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://dugnkqt6m3wk6" path="res://assets/ground_shadow.png" id="3_6tj3q"]
 [ext_resource type="Texture2D" uid="uid://ch7nqm47c2pnk" path="res://assets/knight_with_staff_all_animation.png" id="3_ib17g"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pdq2x"]
-radius = 3.0
-height = 12.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_k6otd"]
+radius = 4.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6tbnj"]
 radius = 80.0
@@ -199,6 +198,7 @@ bg_color = Color(0, 0.605261, 0.0653211, 1)
 y_sort_enabled = true
 collision_layer = 3
 motion_mode = 1
+wall_min_slide_angle = 0.0
 platform_on_leave = 2
 platform_floor_layers = 0
 script = ExtResource("1_wrtln")
@@ -208,8 +208,9 @@ script = ExtResource("1_wrtln")
 [node name="AbilityController" parent="AbilityManager" instance=ExtResource("2_klj25")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
 rotation = -1.5708
-shape = SubResource("CapsuleShape2D_pdq2x")
+shape = SubResource("CircleShape2D_k6otd")
 
 [node name="Player_vision" type="Area2D" parent="."]
 collision_mask = 5
@@ -267,5 +268,6 @@ limit_smoothed = true
 position_smoothing_enabled = true
 editor_draw_limits = true
 
+[connection signal="body_entered" from="Player_vision" to="." method="_on_player_vision_body_entered"]
 [connection signal="body_entered" from="player_hitbox" to="." method="_on_player_hitbox_body_entered"]
 [connection signal="timeout" from="hp_regen" to="." method="_on_hp_regen_timeout"]

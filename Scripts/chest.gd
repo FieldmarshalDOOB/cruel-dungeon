@@ -1,13 +1,7 @@
 extends StaticBody2D
+@onready var player = $"."
+@onready var animation_player = $AnimationPlayer
 
 
-
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.has_method("player"):
-		looting()
-
-func looting():
-	pass
-
-func _on_area_2d_body_exited(_body: Node2D) -> void:
-	pass # Replace with function body.
+func _on_chest_loot_zone_body_entered(_body):
+	animation_player.play("chest_looting")
