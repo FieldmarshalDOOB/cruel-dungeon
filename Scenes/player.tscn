@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bpwkyme4k0xh8"]
+[gd_scene load_steps=33 format=3 uid="uid://bpwkyme4k0xh8"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_wrtln"]
 [ext_resource type="Texture2D" uid="uid://bkvid713q4id8" path="res://assets/spritesheet_skeleton_and_knight_idle.png" id="2_7wmvt"]
@@ -194,6 +194,9 @@ bg_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yepdr"]
 bg_color = Color(0, 0.605261, 0.0653211, 1)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_itc2o"]
+radius = 13.0384
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 y_sort_enabled = true
 collision_layer = 3
@@ -208,11 +211,13 @@ script = ExtResource("1_wrtln")
 [node name="AbilityController" parent="AbilityManager" instance=ExtResource("2_klj25")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -2)
 rotation = -1.5708
 shape = SubResource("CircleShape2D_k6otd")
 
 [node name="Player_vision" type="Area2D" parent="."]
+visible = false
 collision_mask = 5
 
 [node name="vison_cirlce" type="CollisionShape2D" parent="Player_vision"]
@@ -224,6 +229,8 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_hitbox"]
+visible = false
+position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_4e3km")
 debug_color = Color(0.992719, 0, 0.248068, 0.42)
 
@@ -247,6 +254,7 @@ texture = ExtResource("3_6tj3q")
 offset = Vector2(-6, 0)
 
 [node name="player_hp_bar" type="ProgressBar" parent="."]
+visible = false
 offset_left = -10.0
 offset_top = -19.0
 offset_right = 10.0
@@ -267,6 +275,15 @@ limit_bottom = 272
 limit_smoothed = true
 position_smoothing_enabled = true
 editor_draw_limits = true
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_itc2o")
 
 [connection signal="body_entered" from="Player_vision" to="." method="_on_player_vision_body_entered"]
 [connection signal="body_entered" from="player_hitbox" to="." method="_on_player_hitbox_body_entered"]

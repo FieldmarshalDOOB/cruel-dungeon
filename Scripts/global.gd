@@ -1,3 +1,4 @@
 extends Node
 
-var player_current_attack = false
+
+signal exp_bot_collected (exp)
