@@ -1,6 +1,9 @@
 extends CharacterBody2D
 @onready var skeleton_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var player = get_tree().get_first_node_in_group("player") as Node2D
+@onready var health_component = $Health_component
+
+
 
 var speed = 30
 var hp = 100
@@ -48,6 +51,6 @@ func _on_skeleton_detection_area_body_exited(_body):
 	player_chaise = false
 
 
-func _on_skeleton_hitbox_body_entered(_body):
-	_body = player
-	#Скелет должен нанести урон
+func _on_skeleton_hitbox_body_entered(body):
+	body = player
+	health_component.take_damage(20)

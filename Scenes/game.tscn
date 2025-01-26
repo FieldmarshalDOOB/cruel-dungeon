@@ -904,7 +904,7 @@ texture = ExtResource("6_0p1il")
 position = Vector2(-406, 125)
 
 [node name="Skeleton2" parent="." instance=ExtResource("6_6xtun")]
-position = Vector2(-236, -7)
+position = Vector2(-217, 118)
 
 [node name="Chest" parent="." instance=ExtResource("6_8fyab")]
 position = Vector2(-305, 126)
