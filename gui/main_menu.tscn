@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_2l0w0"]
 [ext_resource type="Texture2D" uid="uid://cghthyraa64lp" path="res://assets/logo.png" id="2_65rpw"]
-[ext_resource type="FontFile" uid="uid://de8dc6atyjgey" path="res://assets/PixeloidSans-Bold.ttf" id="3_1mfqs"]
 [ext_resource type="Texture2D" uid="uid://d83d15a5uhal" path="res://assets/lech.png" id="4_0gack"]
 [ext_resource type="Texture2D" uid="uid://1ymhj6ymx0pe" path="res://assets/knight.png" id="5_m44ks"]
+[ext_resource type="Texture2D" uid="uid://cpc0wk3fjjc8n" path="res://gui/плашка для меню.png" id="5_orgcn"]
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3
@@ -15,64 +15,93 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2l0w0")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 0
-offset_right = 1918.0
-offset_bottom = 1077.0
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.997
+offset_right = -2.0
+offset_bottom = 0.23999
 color = Color(0.0926036, 0.188702, 0.247271, 1)
 
-[node name="CanvasModulate" type="CanvasModulate" parent="ColorRect"]
+[node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer/ColorRect"]
 
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 2
-offset_left = 678.0
-offset_top = -2.0
-offset_right = 1423.0
-offset_bottom = 319.0
-
-[node name="Logo" type="Sprite2D" parent="Panel"]
-position = Vector2(371, 158)
+[node name="Logo" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.309896
+anchor_right = 0.690104
+anchor_bottom = 0.278704
+grow_horizontal = 2
 texture = ExtResource("2_65rpw")
+metadata/_edit_use_anchors_ = true
 
-[node name="GridContainer" type="GridContainer" parent="."]
-layout_mode = 0
-offset_left = 115.0
-offset_top = 309.0
-offset_right = 266.0
-offset_bottom = 410.0
-scale = Vector2(7, 7)
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GridContainer"]
-layout_mode = 2
-
-[node name="Play" type="Button" parent="GridContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_1mfqs")
-theme_override_font_sizes/font_size = 18
-text = "Play"
-
-[node name="Settings" type="Button" parent="GridContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_1mfqs")
-text = "Settings"
-
-[node name="Exit" type="Button" parent="GridContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_1mfqs")
-text = "Exit
-"
-
-[node name="Lech" type="Sprite2D" parent="."]
-position = Vector2(1605, 664)
-scale = Vector2(52.0625, 52.0625)
+[node name="Leech" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.65
+anchor_top = 0.278704
+anchor_right = 0.960417
+anchor_bottom = 0.89537
 texture = ExtResource("4_0gack")
+metadata/_edit_use_anchors_ = true
 
-[node name="Knight" type="Sprite2D" parent="."]
-position = Vector2(1008, 899)
-scale = Vector2(22.1875, 22.1875)
+[node name="Knight" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.41875
+anchor_top = 0.650926
+anchor_right = 0.580208
+anchor_bottom = 0.971296
 texture = ExtResource("5_m44ks")
 flip_h = true
+metadata/_edit_use_anchors_ = true
 
-[connection signal="pressed" from="GridContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="GridContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="GridContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[node name="Menu" type="TextureRect" parent="CanvasLayer"]
+custom_minimum_size = Vector2(500, 500)
+anchors_preset = -1
+anchor_top = 0.324074
+anchor_right = 0.260417
+anchor_bottom = 0.787037
+offset_top = 3.05176e-05
+offset_right = 3.05176e-05
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_orgcn")
+metadata/_edit_use_anchors_ = true
+
+[node name="Buttons" type="VBoxContainer" parent="CanvasLayer/Menu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.496
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -174.0
+offset_top = -128.264
+offset_right = 176.0
+offset_bottom = 127.416
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Play" type="Button" parent="CanvasLayer/Menu/Buttons"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+text = "Play"
+
+[node name="Settings" type="Button" parent="CanvasLayer/Menu/Buttons"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+text = "Settings"
+
+[node name="Quit" type="Button" parent="CanvasLayer/Menu/Buttons"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+text = "Quit"
+
+[connection signal="pressed" from="CanvasLayer/Menu/Buttons/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/Menu/Buttons/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="CanvasLayer/Menu/Buttons/Quit" to="." method="_on_quit_pressed"]
