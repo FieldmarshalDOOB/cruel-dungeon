@@ -2,6 +2,8 @@
 
 [ext_resource type="FontFile" uid="uid://j0xxybnmmab3" path="res://assets/Jacquard12-Regular.ttf" id="1_0rjbc"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lom27"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wcgx3"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
@@ -57,7 +59,7 @@ Button/colors/font_color = Color(0.8, 0.8, 0.8, 1)
 Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
 Button/font_sizes/font_size = 26
 Button/styles/disabled = SubResource("StyleBoxFlat_wcgx3")
-Button/styles/focus = SubResource("StyleBoxFlat_gdcix")
+Button/styles/focus = SubResource("StyleBoxEmpty_lom27")
 Button/styles/hover = SubResource("StyleBoxTexture_lyq3t")
 Button/styles/hover_pressed = SubResource("StyleBoxTexture_27l2n")
 Button/styles/normal = SubResource("StyleBoxTexture_pc7n7")

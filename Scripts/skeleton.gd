@@ -1,20 +1,17 @@
 extends CharacterBody2D
 @onready var skeleton_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var player = get_tree().get_first_node_in_group("player") as Node2D
 
-var speed = 70 #Чем выше тем медленее - мы делем на скокрость
-var player_chaise = false
-var player = null
+var speed = 30
 var hp = 100
-var player_in_attack_zone = false
-var can_take_dmg = true
-var hp_regeneration = 0
+var player_chaise : bool
 
-func _physics_process(_delta: float) -> void:
-	deal_with_damage()
+func _process(_delta):
 	update_health()
-	
 	if player_chaise:
-		position += (player.position - position)/speed
+		var direction = get_direction_to_player()
+		velocity = speed * direction
+		move_and_slide()
 		skeleton_sprite.play("walk")
 		if (player.position.x - position.x) < 0:
 			skeleton_sprite.flip_h = true
@@ -24,59 +21,33 @@ func _physics_process(_delta: float) -> void:
 		skeleton_sprite.play("idle")
 
 
-func _on_detection_area_body_entered(body: Node2D) -> void:
-	player = body
-	player_chaise = true
-
-
-func _on_detection_area_body_exited(_body: Node2D) -> void:
-	player = null
-	player_chaise = false
-
-func enemy():
-	pass
-
-
-func _on_enemy_hitbox_body_entered(body: Node2D) -> void:
-	if body.has_method("player"):
-		player_in_attack_zone = true
-
-
-func _on_enemy_hitbox_body_exited(body: Node2D) -> void:
-	if body.has_method("player"):
-		player_in_attack_zone = false
-
-func deal_with_damage():
-	if player_in_attack_zone and global.player_current_attack == true:
-		if can_take_dmg:
-			hp -= 20
-			$AnimatedSprite2D.play("hit")
-			$take_damage_cooldown.start()
-			can_take_dmg = false
-			#print("Skeleton HP: " + str(hp))
-			if hp <= 0:
-				$AnimatedSprite2D.play("death")
-				self.queue_free()
+func get_direction_to_player():
+	if player != null:
+		return (player.global_position - global_position).normalized()
+	else:
+		return Vector2.ZERO
 
 
 func update_health():
-	var hpbar = $skeleton_hp_bar
-	hpbar.value = hp
+	var hp_bar = $skeleton_hp_bar
+	hp_bar.value = hp
 	#Прячет полоску хп если хп фулл
-	if hp >= 100: #убрать если в будет худ
-		hpbar.visible = false
+	if hp >= 100:
+		hp_bar.visible = false
 	else:
-		hpbar.visible = true
+		hp_bar.visible = true
 
 
-func _on_take_damage_cooldown_timeout() -> void:
-	can_take_dmg = true
+func _on_skeleton_detection_area_body_entered(_body):
+	_body = player
+	player_chaise = true
 
 
-func _on_hp_regen_timeout() -> void:
-	if hp < 100:
-		hp += hp_regeneration
-		if hp > 100:
-			hp = 100
-	if hp <= 0:
-		hp = 0
+func _on_skeleton_detection_area_body_exited(_body):
+	_body = player
+	player_chaise = false
+
+
+func _on_skeleton_hitbox_body_entered(_body):
+	_body = player
+	#Скелет должен нанести урон
