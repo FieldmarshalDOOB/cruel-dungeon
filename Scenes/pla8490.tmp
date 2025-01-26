@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bwtsuyg2uk0u8" path="res://Scenes/ability_controller.tscn" id="2_klj25"]
 [ext_resource type="Texture2D" uid="uid://dugnkqt6m3wk6" path="res://assets/ground_shadow.png" id="3_6tj3q"]
 [ext_resource type="Texture2D" uid="uid://ch7nqm47c2pnk" path="res://assets/knight_with_staff_all_animation.png" id="3_ib17g"]
+[ext_resource type="Texture2D" uid="uid://bfdbkt0f5rx3n" path="res://assets/03_UI_Stuff.png" id="5_ney5a"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pdq2x"]
 radius = 3.0
@@ -31,22 +32,6 @@ region = Rect2(76, 96, 38, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_hvojr"]
 atlas = ExtResource("3_ib17g")
 region = Rect2(114, 96, 38, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_70m7a"]
-atlas = ExtResource("2_7wmvt")
-region = Rect2(38, 64, 38, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_11fys"]
-atlas = ExtResource("2_7wmvt")
-region = Rect2(0, 64, 38, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_n6o7l"]
-atlas = ExtResource("2_7wmvt")
-region = Rect2(38, 128, 38, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sx3vq"]
-atlas = ExtResource("2_7wmvt")
-region = Rect2(0, 128, 38, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bdiks"]
 atlas = ExtResource("3_ib17g")
@@ -117,23 +102,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_70m7a")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_11fys")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_n6o7l")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sx3vq")
-}],
-"loop": true,
-"name": &"cast",
-"speed": 3.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_bdiks")
 }, {
 "duration": 1.0,
@@ -146,7 +114,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_7n0bt")
 }],
 "loop": true,
-"name": &"death",
+"name": &"died",
 "speed": 3.0
 }, {
 "frames": [{
@@ -195,6 +163,107 @@ bg_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yepdr"]
 bg_color = Color(0, 0.605261, 0.0653211, 1)
 
+[sub_resource type="Animation" id="Animation_rhmij"]
+resource_name = "attack_animation"
+length = 0.75
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 3.86373),
+"update": 0,
+"values": [-0.244346, -1.53065, 1.75057]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1), Vector2(1.25, 1.25), Vector2(1, 1), Vector2(0, 0)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.75),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_mj2f8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.244346]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yr31e"]
+_data = {
+"RESET": SubResource("Animation_mj2f8"),
+"attack_animation": SubResource("Animation_rhmij")
+}
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 y_sort_enabled = true
 collision_layer = 3
@@ -212,15 +281,14 @@ rotation = -1.5708
 shape = SubResource("CapsuleShape2D_pdq2x")
 
 [node name="Player_vision" type="Area2D" parent="."]
-collision_mask = 5
+visible = false
 
 [node name="vison_cirlce" type="CollisionShape2D" parent="Player_vision"]
 shape = SubResource("CircleShape2D_6tbnj")
 debug_color = Color(0, 0.650325, 0.0995586, 0.42)
 
 [node name="player_hitbox" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 0
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_hitbox"]
 shape = SubResource("CircleShape2D_4e3km")
@@ -233,8 +301,9 @@ autostart = true
 position = Vector2(0, -8)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_ohnfq")
-animation = &"idle"
+animation = &"walk"
 autoplay = "idle"
+frame_progress = 0.504962
 
 [node name="Shadow" type="Sprite2D" parent="AnimatedSprite2D"]
 modulate = Color(0, 0, 0, 0.564706)
@@ -246,6 +315,7 @@ texture = ExtResource("3_6tj3q")
 offset = Vector2(-6, 0)
 
 [node name="player_hp_bar" type="ProgressBar" parent="."]
+visible = false
 offset_left = -10.0
 offset_top = -19.0
 offset_right = 10.0
@@ -266,6 +336,22 @@ limit_bottom = 272
 limit_smoothed = true
 position_smoothing_enabled = true
 editor_draw_limits = true
+
+[node name="Sword" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0, 0, 0, 1)
+position = Vector2(6.72, -6.66)
+rotation = -0.244346
+texture = ExtResource("5_ney5a")
+offset = Vector2(5.26, -4)
+region_enabled = true
+region_rect = Rect2(465, 81, 14, 14)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sword")
+libraries = {
+"": SubResource("AnimationLibrary_yr31e")
+}
 
 [connection signal="body_entered" from="player_hitbox" to="." method="_on_player_hitbox_body_entered"]
 [connection signal="timeout" from="hp_regen" to="." method="_on_hp_regen_timeout"]

@@ -167,23 +167,20 @@ platform_floor_layers = 0
 script = ExtResource("1_6uy4v")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(1, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_dyrq8")
 one_way_collision_margin = 0.0
 
 [node name="skeleton_detection_area" type="Area2D" parent="."]
-visible = false
-collision_layer = 2
-collision_mask = 2
+collision_layer = 0
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="skeleton_detection_area"]
 shape = SubResource("CircleShape2D_7t11k")
 debug_color = Color(0.191958, 0.641356, 0.0549405, 0.42)
 
 [node name="skeleton_hitbox" type="Area2D" parent="." groups=["enemy"]]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="skeleton_hitbox"]
 shape = SubResource("CircleShape2D_m7l6a")
@@ -206,7 +203,6 @@ texture = ExtResource("3_bltsh")
 offset = Vector2(-6, 0)
 
 [node name="skeleton_hp_bar" type="ProgressBar" parent="."]
-visible = false
 offset_left = -11.0
 offset_top = -19.0
 offset_right = 9.0
