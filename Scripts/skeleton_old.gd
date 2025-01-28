@@ -47,7 +47,7 @@ func _on_enemy_hitbox_body_exited(body: Node2D) -> void:
 		player_in_attack_zone = false
 
 func deal_with_damage():
-	if player_in_attack_zone and global.player_current_attack == true:
+	#if player_in_attack_zone and global.player_current_attack == true:
 		if can_take_dmg:
 			hp -= 20
 			$AnimatedSprite2D.play("hit")

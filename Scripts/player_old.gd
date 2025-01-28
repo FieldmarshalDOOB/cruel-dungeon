@@ -66,14 +66,14 @@ func _on_attack_cooldown_timeout() -> void:
 func attack():
 	#var dir = Vector2() #Сюда добавить внимации атаки в зависимости от направления
 	if enemy_in_attack_range:
-		global.player_current_attack = true
+		#global.player_current_attack = true
 		attack_ip = true
 		$deal_attack_timer.start()
 
 
 func _on_deal_attack_timer_timeout() -> void:
 	$deal_attack_timer.stop()
-	global.player_current_attack = false
+	#global.player_current_attack = false
 	attack_ip = false
 
 

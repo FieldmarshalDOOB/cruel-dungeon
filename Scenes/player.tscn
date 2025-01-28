@@ -217,7 +217,6 @@ rotation = -1.5708
 shape = SubResource("CircleShape2D_k6otd")
 
 [node name="Player_vision" type="Area2D" parent="."]
-visible = false
 collision_mask = 5
 
 [node name="vison_cirlce" type="CollisionShape2D" parent="Player_vision"]

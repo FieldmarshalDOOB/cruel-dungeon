@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/chest.gd" id="1_whruu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_08dm0"]
-size = Vector2(16, 7)
+size = Vector2(16, 6)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1c7w7"]
 size = Vector2(26, 20)
@@ -104,7 +104,7 @@ region_rect = Rect2(208, 385, 16, 15)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 y_sort_enabled = true
-position = Vector2(0, -2.5)
+position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_08dm0")
 
 [node name="ChestLootZone" type="Area2D" parent="."]
